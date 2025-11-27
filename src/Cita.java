@@ -1,6 +1,9 @@
 import java.util.Date;
+import java.util.Scanner;
 
 public class Cita {
+
+    Scanner leer = new Scanner(System.in);
 
     private int nCita;
     private Date fecha;
@@ -63,6 +66,11 @@ public class Cita {
         this.medico = medico;
     }
 
+    //Metodo de reservacion de cita
+    public String  ReservarCita (){
+        System.out.println("Ingrese la fecha para reservar la cita");
+        String fechaPrueba= leer.nextLine();
 
+    }
 
 }
