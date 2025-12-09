@@ -1,76 +1,68 @@
 import java.util.Date;
-import java.util.Scanner;
+import java.util.Objects;
+import java.text.SimpleDateFormat;
 
 public class Cita {
 
-    Scanner leer = new Scanner(System.in);
-
     private int nCita;
     private Date fecha;
-    private int DNIPaciente;
-    private int herramientas;
-    private int tratamiento;
-    private int sala;
-    private int medico;
+    private Paciente paciente;
+    private Herramienta herramientas;
+    private Tratamiento tratamiento;
+    private Sala sala;
+    private Odontologo odontologo;
 
-    public Cita(int nCita, Date fecha, int DNIPaciente, int herramientas, int tratamiento, int sala, int medico) {
+    public Cita(Date fecha, Paciente paciente, Herramienta herramientas, Tratamiento tratamiento, Sala sala, Odontologo odontologo) {
         this.nCita = nCita;
         this.fecha = fecha;
-        this.DNIPaciente = DNIPaciente;
+        this.paciente = paciente;
         this.herramientas = herramientas;
         this.tratamiento = tratamiento;
         this.sala = sala;
-        this.medico = medico;
+        this.odontologo = odontologo;
     }
 
-    public int getnCita() {
-        return nCita;
-    }
-    public void setnCita(int nCita) {
-        this.nCita = nCita;
-    }
-    public Date getFecha() {
-        return fecha;
-    }
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-    public int getDNIPaciente() {
-        return DNIPaciente;
-    }
-    public void setDNIPaciente(int DNIPaciente) {
-        this.DNIPaciente = DNIPaciente;
-    }
-    public int getHerramientas() {
-        return herramientas;
-    }
-    public void setHerramientas(int herramientas) {
-        this.herramientas = herramientas;
-    }
-    public int getTratamiento() {
-        return tratamiento;
-    }
-    public void setTratamiento(int tratamiento) {
-        this.tratamiento = tratamiento;
-    }
-    public int getSala() {
-        return sala;
-    }
-    public void setSala(int sala) {
-        this.sala = sala;
-    }
-    public int getMedico() {
-        return medico;
-    }
-    public void setMedico(int medico) {
-        this.medico = medico;
+    public Date getFecha() { return fecha; }
+    public void setFecha(Date fecha) { this.fecha = fecha; }
+    public int getnCita() { return nCita; }
+    public void setnCita(int nCita) { this.nCita = nCita; }
+    public Sala getSala() { return sala; }
+    public void setSala(Sala sala) { this.sala = sala; }
+    public Odontologo getOdontologo() { return odontologo; }
+    public void setOdontologo(Odontologo odontologo) { this.odontologo = odontologo; }
+    public Paciente getPaciente() { return paciente; }
+    public void setPaciente(Paciente paciente) { this.paciente = paciente; }
+    public Tratamiento getTratamiento() { return tratamiento; }
+    public void setTratamiento(Tratamiento tratamiento) { this.tratamiento = tratamiento; }
+    public Herramienta getHerramientas() { return herramientas; }
+    public void setHerramientas(Herramienta herramientas) { this.herramientas = herramientas; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Cita)) return false;
+        Cita cita = (Cita) o;
+        return nCita == cita.nCita;
     }
 
-    //Metodo de reservacion de cita
-    public String  ReservarCita (){
-        System.out.println("Ingrese la fecha para reservar la cita");
-        String fechaPrueba= leer.nextLine();
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(nCita);
     }
 
+    @Override
+    public String toString() {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+        return "\n------------------------------" +
+                "\nID Cita: " + nCita +
+                "\nFecha: " + formato.format(fecha) +
+                "\nPaciente: " + paciente.getNombres() + " " + paciente.getApellidos() +
+                "\nDNI Paciente: " + paciente.getDNIPaciente() +
+                "\nTratamiento: " + tratamiento.getIdTratamiento() +
+                "\nHerramienta: " + herramientas.getNombre() +
+                "\nSala: " + sala.getIdSala() +
+                "\nOdontólogo: " + odontologo.getNombre() +
+                "\n------------------------------";
+    }
 }
